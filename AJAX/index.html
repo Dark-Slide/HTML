@@ -13,7 +13,10 @@
     }
   };
   xhr.open('GET', 'sidebar.html');
-  xhr.send();
+  function sendAjax() {
+    xhr.send();
+    document.getElementById('load').style.display = 'none';
+  };
   </script>
 </head>
 <body>
@@ -23,10 +26,11 @@
         <div class="grid-100">
           <div class="heading">
             <h1>Bring on the AJAX</h1>
+            <button id="load" onclick="sendAjax()">Bring it!</button>
           </div>
-          <ul id="ajax">
+          <div id="ajax">
 
-          </ul>
+          </div>
         </div>
       </div>
     </div>
