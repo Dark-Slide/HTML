@@ -25,7 +25,7 @@ roomRequest.onreadystatechange = function() {
 		var rooms = JSON.parse(roomRequest.responseText);
 		var statusHTML = '<ul class="rooms">';
 		for (var i = 0; i < rooms.length; i++) {
-			if (rooms[i].inoffice === true) {
+			if (rooms[i].available === true) {
 				statusHTML += '<li class="empty">';
 			} else {
 				statusHTML += '<li class="full">';
