@@ -9,7 +9,18 @@
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
-      document.getElementById('ajax').innerHTML = xhr.responseText;
+      if (xhr.status === 200) {
+        document.getElementById('ajax').innerHTML = xhr.responseText;
+      } else if (xhr.status === 404) { // File not found
+        alert(`Alert, file not found.
+          Error Message: ${xhr.statusText}`);
+      } else if (xhr.status === 500) { // Server had a problem
+        alert(`Alert, sever error. Please contact the site admin! 
+          Error Message: ${xhr.statusText}`);
+      } else {
+        alert(`An unexpected error cause a failiure. Please contact the site admin!
+          Error Message: ${xhr.statusText}`);
+      }
     }
   };
   xhr.open('GET', 'sidebar.html');
