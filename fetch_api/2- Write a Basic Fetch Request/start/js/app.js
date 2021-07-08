@@ -5,19 +5,23 @@ const form = document.querySelector('form');
 // ------------------------------------------
 //  FETCH FUNCTIONS
 // ------------------------------------------
-fetch('https://dog.ceo/api/breeds/list/all')
-	.then(response => response.json())
-	.then(data => generateOptions(data.message))
+fetchData('https://dog.ceo/api/breeds/list/all')
+	.then(data => generateOptions(data.message));
 
 
-fetch('https://dog.ceo/api/breeds/image/random')
-	.then(response => response.json())
+fetchData('https://dog.ceo/api/breeds/image/random')
 	.then(data => generateImage(data.message));
 
 
 // ------------------------------------------
 //  HELPER FUNCTIONS
 // ------------------------------------------
+
+function fetchData(url) {
+	return fetch(url)
+		.then(res => res.json())
+}
+
 function generateOptions(data) {
 	const options = data.map(item => `
 		<option value='${item}'>${item}</option>`).join('');
