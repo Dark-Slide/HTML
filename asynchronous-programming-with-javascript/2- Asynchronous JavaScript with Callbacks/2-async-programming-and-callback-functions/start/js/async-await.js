@@ -46,9 +46,7 @@ function generateHTML(data) {
 
 btn.addEventListener('click', (event) => {
   event.target.textContent = "Loading...";
-
-  const astros = await getPeopleInSpace(astrosUrl);
-  generateHTML(astros);
-
-  event.target.remove();
+  getPeopleInSpace(astrosUrl)
+  .then(generateHTML)
+  .finally( () => event.target.remove())
 });
