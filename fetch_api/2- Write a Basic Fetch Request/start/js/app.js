@@ -23,7 +23,7 @@ function fetchData(url) {
 }
 
 Promise.all([
-	fetchData('https://dog.ceo/api/breeds/list')
+	fetchData('https://dog.ceo/api/breeds/list'),
 	fetchData('https://dog.ceo/api/breeds/image/random')
 ])
 .then(data => {
@@ -32,7 +32,7 @@ Promise.all([
 
 	generateOptions(breedList);
 	generateImage(randomImage);
-})
+});
 // ------------------------------------------
 //  HELPER FUNCTIONS
 // ------------------------------------------
@@ -74,9 +74,25 @@ function fetchBreedImage() {
 
 select.addEventListener('change', fetchBreedImage);
 card.addEventListener('click', fetchBreedImage);
+form.addEventListener('submit', postData);
 
 
 // ------------------------------------------
 //  POST DATA
 // ------------------------------------------
+
+function postData(e) {
+	e.preventDefault();
+	const name = document.getElementById('name').value;
+	const comment = document.getElementById('comment').value;
+
+	fetch('https://jsonplaceholder.typicode.com/comments', {
+		method: 'POST',
+		headers: {'Content-Type' : 'application/json'},
+		body: JSON.stringify({ name, comment })
+	})
+		.then(checkStatus)
+		.then(res => res.json())
+		.then(data => console.log(data))
+}
 
