@@ -11,7 +11,7 @@ function getJSON(url) {
     xhr.onload = () => {
       if(xhr.status === 200) {
         let data = JSON.parse(xhr.responseText);
-        return callback(data);
+        resolve(data);
       } else {
         reject( Error(xhr.statusText));
       }
