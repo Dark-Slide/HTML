@@ -6,7 +6,8 @@ const form = document.querySelector('form');
 //  FETCH FUNCTIONS
 // ------------------------------------------
 fetchData('https://dog.ceo/api/breeds/list/all')
-	.then(data => generateOptions(data.message));
+	.then(data => generateOptions(data.message))
+	.catch(error => console.log('Looks like there was a problem', error));
 
 
 fetchData('https://dog.ceo/api/breeds/image/random')
