@@ -41,7 +41,7 @@ function generateHTML(data) {
 btn.addEventListener('click', (event) => {
   getJSON(astrosUrl, () => {
     json.people.map( person => {
-      getJSON(wikiUrl, + person.name, generateHTML;
+      getJSON(wikiUrl, + person.name, generateHTML);
     });
   });
     event.target.remove();
