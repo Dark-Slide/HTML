@@ -25,7 +25,7 @@ function getProfiles(json) {
   const profiles = json.people.map( person => {
     return getJSON(wikiUrl + person.name);
   });
-  return Promise.all(profiles);
+  return Promise.all(profiles); // Promise.all will fail, if a single promise fails.
 }
 
 // Generate the markup for each profile
@@ -54,9 +54,10 @@ function generateHTML(data) {
 }
 
 btn.addEventListener('click', (event) => {
+  event.target.textContent = "Loading...";
   getJSON(astrosUrl)
     .then(getProfiles)
     .then(generateHTML)
-    .catch( err => console.log(err));
-  event.target.remove();
+    .catch( err => console.log(err))
+    .finally( () => event.target.remove());
 }); 
