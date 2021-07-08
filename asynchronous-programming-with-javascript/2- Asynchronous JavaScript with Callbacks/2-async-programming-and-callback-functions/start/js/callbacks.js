@@ -27,10 +27,10 @@ function getProfiles(json) {
     return fetch(wikiUrl + person.name)
       .then(  response => response.json())
       .then( profile => {
-        return {...profile, craft};
+        return {...profile, craft}
       })
       .catch( err => console.log('Error Fetching Wiki: ',err));
-  });
+  }); 
   return Promise.all(profiles); // Promise.all will fail, if a single promise fails.
 }
 
