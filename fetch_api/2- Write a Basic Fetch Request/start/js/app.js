@@ -23,10 +23,12 @@ function fetchData(url) {
 }
 
 function generateOptions(data) {
-	const options = data.map(item => `
-		<option value='${item}'>${item}</option>`).join('');
-	select.innerHTML = options;
+  const options = data.map((item) => `
+    <option value='${item}'>${item}</option>
+  `).join('');
+  select.innerHTML = options;
 }
+
 
 
 function generateImage (data) {
