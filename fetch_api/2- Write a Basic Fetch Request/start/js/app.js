@@ -20,7 +20,7 @@ fetch('https://dog.ceo/api/breeds/image/random')
 // ------------------------------------------
 function generateOptions(data) {
 	const options = data.map(item => `
-		<option value='${item}'>${item}</option>`)
+		<option value='${item}'>${item}</option>`).join('');
 	select.innerHTML = options;
 }
 
