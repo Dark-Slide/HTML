@@ -5,23 +5,38 @@ const form = document.querySelector('form');
 // ------------------------------------------
 //  FETCH FUNCTIONS
 // ------------------------------------------
-fetchData('https://dog.ceo/api/breeds/list')
-  .then(data => generateOptions(data.message))
 
-fetchData('https://dog.ceo/api/breeds/image/random')
-  .then(data => generateImage(data.message))
-
-
-// ------------------------------------------
-//  HELPER FUNCTIONS
-// ------------------------------------------
+function checkStatus(response) {
+	if(response.ok) {
+		return Promise.resolve(response);
+	} else {
+		return Promise.reject(new Error(response.statusText));
+	}
+}
 
 function fetchData(url) {
 	return fetch(url)
+		.then(checkStatus)
 		.then(res => res.json())
 		.catch(error => console.log('Looks like there was a problem', error));
 
 }
+
+Promise.all([
+	fetchData('https://dog.ceo/api/breeds/list')
+	fetchData('https://dog.ceo/api/breeds/image/random')
+])
+.then(data => {
+	const breedList = data[0].message;
+	const randomImage = data[1].message;
+
+	generateOptions(breedList);
+	generateImage(randomImage);
+})
+// ------------------------------------------
+//  HELPER FUNCTIONS
+// ------------------------------------------
+
 
 function generateOptions(data) {
   const options = data.map(item => `
