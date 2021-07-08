@@ -23,9 +23,13 @@ const btn = document.querySelector('button');
 
 function getProfiles(json) {
   const profiles = json.people.map( person => {
+    const craft = person.craft;
     return fetch(wikiUrl + person.name)
-      .then(  response => response.json());
-      .catch( err => console.log('Error Fetching Wiki: ',err))
+      .then(  response => response.json())
+      .then( profile => {
+        return {...profile, craft};
+      });
+      .catch( err => console.log('Error Fetching Wiki: ',err));
   });
   return Promise.all(profiles); // Promise.all will fail, if a single promise fails.
 }
@@ -39,6 +43,7 @@ function generateHTML(data) {
     if (data.type === 'standard') {
       section.innerHTML = `
         <img src=${person.thumbnail.source}>
+        <span>${person.craft}</span>
         <h2>${person.title}</h2>
         <p>${person.description}</p>
         <p>${person.extract}</p>
