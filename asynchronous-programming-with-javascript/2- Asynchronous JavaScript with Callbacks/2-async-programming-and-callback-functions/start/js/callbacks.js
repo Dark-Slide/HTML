@@ -25,6 +25,7 @@ function getProfiles(json) {
   const profiles = json.people.map( person => {
     return fetch(wikiUrl + person.name)
       .then(  response => response.json());
+      .catch( err => console.log('Error Fetching Wiki: ',err))
   });
   return Promise.all(profiles); // Promise.all will fail, if a single promise fails.
 }
